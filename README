@@ -1,0 +1,156 @@
+import os
+import random
+
+stages = ['''
+  +---+
+  |   |
+      |
+      |      
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |          STRIKE 1
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |          STRIKE 2
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |          STRIKE 3
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\\  |          STRIKE 4
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\\  |          STRIKE 5
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\\  |          STRIKE 6
+ / \\  |
+      |
+=========''']
+def win():
+  print(" ▓██   ██▓ ▒█████   █    ██     █     █░  ██▓    ███▄    █ ")
+  print(" ▒██  ██▒▒ ██▒  ██▒  ██  ▓██▒   ▓█░ █ ░█░ ▓██▒   ██ ▀█   █ ")
+  print("  ▒██ ██░▒ ██░  ██▒ ▓██  ▒██░   ▒█░ █ ░█  ▒██▒   ▓██  ▀█ ██▒")
+  print(" ░▐██▓░▒   ██   ██░ ▓▓█  ░██░   ░█░ █ ░█  ░██░   ▓██▒  ▐▌██▒")
+  print("  ░██▒▓░░   ████▓▒░ ▒▒█████▓    ░░██▒██▓  ░██░   ▒██░   ▓██░")
+  print("   ██▒▒▒ ░ ▒░▒░▒░ ░ ▒▓▒ ▒ ▒    ░ ▓░▒ ▒    ░▓     ░ ▒░   ▒ ▒ ")
+  print(" ▓██ ░▒░   ░ ▒ ▒░ ░ ░▒░ ░ ░      ▒ ░ ░     ▒ ░░   ░░   ░ ▒░")
+  print(" ▒ ▒ ░░  ░ ░ ░ ▒    ░░░ ░ ░      ░   ░     ▒ ░     ░   ░ ░ ")
+  print(" ░ ░         ░ ░      ░            ░       ░           ░ ")
+  print(" ░ ░                                                  ")
+def lose():
+  print ("▓██   ██▓ ▒█████   █    ██     ██▓     ▒█████    ██████ ▓█████ ")
+  print (" ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▓██▒    ▒██▒  ██▒▒██    ▒ ▓█   ▀ ")
+  print (" ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒██░    ▒██░  ██▒░ ▓██▄   ▒███   ")
+  print (" ░ ▐██▓░▒██   ██░▓▓█  ░██░   ▒██░    ▒██   ██░  ▒   ██▒▒▓█  ▄ ")
+  print (" ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░██████▒░ ████▓▒░▒██████▒▒░▒████▒")
+  print (" ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ░ ▒░▓  ░░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░░ ▒░ ░")
+  print (" ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░    ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░▒  ░ ░ ░ ░  ░")
+  print (" ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░      ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░   ")
+  print (" ░ ░         ░ ░     ░            ░  ░    ░ ░        ░     ░  ░")
+  print (" ░ ░                                                           ")
+
+wordbank = ["chair","house","python","coding","fruit","car","boat","clear","cloud"]
+
+strikes = 0
+
+game = True
+
+while game:
+  strikes = 0
+  word = random.choice(wordbank)
+  blank = "_" * len(word)
+  cletters = []
+  status = ''
+  
+  while strikes < 6:
+    os.system("clear") 
+    print(" _____________________________________________________________ ")
+    print("| HH   HH                                                     |")  
+    print("| HH   HH   aa aa nn nnn   gggggg mm mm mmmm    aa aa nn nnn  |")
+    print("| HHHHHHH  aa aaa nnn  nn gg   gg mmm  mm  mm  aa aaa nnn  nn |")
+    print("| HH   HH aa  aaa nn   nn ggggggg mmm  mm  mm aa  aaa nn   nn |")
+    print("| HH   HH  aaa aa nn   nn      gg mmm  mm  mm  aaa aa nn   nn |")
+    print("|                          ggggg                              |")
+    print("|_____________________________________________________________|")
+    print("RANDOM WORD:")
+    print(blank)
+    print("")
+    print("GUESSED LETTERS:",cletters)
+    print(stages[strikes])
+    print(status)
+    print("")
+    letter = input("GUESS A LETTER: ")
+    print()
+    if letter == '' :
+      status = "PLEASE ENTER A SINGLE LETTER"
+      print()
+      continue
+    if letter not in 'abcdefghijklmnopqrstuvwxyz':
+      status = "PLEASE ENTER A SINGLE LETTER"
+      print()
+    elif letter in cletters:
+      status = "YOU ALREADY ENTERED THIS LETTER."
+      print()      
+    elif letter not in word:
+      strikes += 1
+      status = "WRONG!"
+      print(blank)
+      cletters.append(letter)     
+    elif letter in word:
+      index = word.find(letter)
+      blank = blank[:index] + letter + blank[index+1:]
+      cletters.append(letter)
+      status = "YOU GUESSED A LETTER!"
+    if "_" not in blank:
+      os.system('clear')
+      win()
+      replay = input("PLAY AGAIN? (Y/N)")
+      if replay.upper() != 'Y':
+        game = False
+        break
+      elif replay.upper() == 'Y':
+        strikes = 0
+        word = random.choice(wordbank)
+        blank = "_" * len(word)
+        cletters = []
+        status = ''
+    if strikes == 6:
+      os.system('clear')
+      print(stages[6])
+      print("")
+      lose()
+      replay = input("PLAY AGAIN? (Y/N)")
+      if replay.upper() != 'Y':
+        game = False
+        break
+      elif replay.upper() == 'Y':
+        strikes = 0
+        word = random.choice(wordbank)
+        blank = "_" * len(word)
+        cletters = []
+        status = ''
